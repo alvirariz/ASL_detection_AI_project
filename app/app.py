@@ -215,9 +215,10 @@ st.markdown("""
 # ===== LOAD MODEL =====
 @st.cache_resource
 def load_model():
-    """Load the trained model (cached for performance)"""
+    import os
+    model_path = os.path.join(os.path.dirname(__file__), 'model_v3.pth')
     model = DeepCNN(dropout_rate=0.5, dense_units=256)
-    model.load_state_dict(torch.load('model_v3.pth', map_location=torch.device('cpu')))
+    model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
     model.eval()
     return model
 
